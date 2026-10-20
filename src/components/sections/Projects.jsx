@@ -32,7 +32,7 @@ function ProjectDialog({ project, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-dialog-title"
-        className="panel max-h-[85svh] w-full max-w-2xl overflow-y-auto rounded-3xl p-6 md:p-10"
+        className="panel scroll-hidden max-h-[85svh] w-full max-w-2xl overflow-y-auto rounded-3xl p-6 md:p-10"
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 24, opacity: 0 }}

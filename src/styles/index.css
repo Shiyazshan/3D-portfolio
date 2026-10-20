@@ -93,6 +93,15 @@ html.lenis body { height: auto; }
   to { background-position: -60% 0, 0 0; }
 }
 
+/* Scrollable areas that keep scrolling (wheel, touch, keyboard) but never show a scrollbar. */
+.scroll-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+}
+.scroll-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Edge, Safari */
+}
+
 /* Reading panels: solid enough to keep paragraphs off busy 3D backgrounds. */
 .panel {
   background: color-mix(in oklab, var(--color-coal) 92%, transparent);

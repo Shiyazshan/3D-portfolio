@@ -18,7 +18,7 @@ export function Chapter({ id, stop, labelledBy, height = 'h-[190vh]', align = 'l
           when the screen is too short to show it whole (e.g. a phone held sideways).
         */}
         <div
-          className={`pointer-events-auto w-full max-w-2xl overflow-y-auto overscroll-contain rounded-3xl wide:w-auto wide:max-w-[min(100%,56vw)] wide:max-h-[calc(100svh-7rem)] short:max-h-[calc(100svh-6rem)] [&>*]:pointer-events-auto [&>*]:mx-auto wide:[&>*]:mx-0 ${mobileMaxHeight}`}
+          className={`scroll-hidden pointer-events-auto w-full max-w-2xl overflow-y-auto overscroll-contain rounded-3xl wide:w-auto wide:max-w-[min(100%,56vw)] wide:max-h-[calc(100svh-7rem)] short:max-h-[calc(100svh-6rem)] [&>*]:pointer-events-auto [&>*]:mx-auto wide:[&>*]:mx-0 ${mobileMaxHeight}`}
         >
           {children}
         </div>
