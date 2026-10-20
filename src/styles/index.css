@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+
+/*
+ * `wide:` = side-by-side layout (landscape and at least 768px wide): laptops, desktops,
+ * landscape tablets and phones held sideways. Everything in portrait (phones, upright tablets)
+ * gets the stacked layout. The 3D camera uses the same portrait/landscape rule (CameraRig).
+ * `short:` = screens under 560px tall (phones held sideways) — tighter spacing.
+ */
+@custom-variant wide (@media (min-width: 768px) and (orientation: landscape));
+@custom-variant short (@media (max-height: 560px));
+/* `compact:` = portrait screens under 760px tall (most phones) — keep the hero text block small. */
+@custom-variant compact (@media (max-height: 760px) and (orientation: portrait));
+
+@theme {
+  --color-void: #06070b;
+  --color-coal: #12141b;
+  --color-coal-2: #1a1d27;
+  --color-line: #262a37;
+  --color-ink: #e9ebf3;
+  --color-mute: #8d93a8;
+  --color-volt: #5b8cff;
+  --color-iris: #9277ff;
+  --color-tide: #5fd6dd;
+  --font-sans: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Sora', 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-variation-settings: 'opsz' 14;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--color-void);
+  overflow-x: hidden;
+}
+
+/* Lenis recommended base styles */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+.display {
+  font-variation-settings: 'opsz' 96, 'wdth' 78;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+}
+
+.heading {
+  font-variation-settings: 'opsz' 48, 'wdth' 85;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+/*
+ * Name: geometric, heavy, tightly tracked. A cool white gradient lifts it off the dark scene;
+ * one slow light sweep passes across each line on load (disabled for reduced motion).
+ */
+.name-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.name-fill {
+  display: inline-block;
+  padding-bottom: 0.06em; /* keep descenders inside the clipped background */
+  background-image: linear-gradient(100deg, #ffffff 0%, #eef1ff 38%, #c3cdfb 72%, #a9b6f5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Soft glow behind the name — side-by-side layout only (a blurred filter on huge text is costly on phones). */
+@media (min-width: 768px) and (orientation: landscape) {
+  .name-fill { filter: drop-shadow(0 6px 30px rgb(91 140 255 / 0.18)); }
+}
+.name-sheen {
+  background-image:
+    linear-gradient(100deg, transparent 0 40%, rgb(255 255 255 / 0.95) 50%, transparent 60% 100%),
+    linear-gradient(100deg, #ffffff 0%, #eef1ff 38%, #c3cdfb 72%, #a9b6f5 100%);
+  background-size: 250% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: 160% 0, 0 0;
+  animation: name-sheen 2.2s cubic-bezier(0.45, 0, 0.2, 1) 1.6s 1 both;
+}
+.name-sheen-late { animation-delay: 1.85s; }
+@keyframes name-sheen {
+  to { background-position: -60% 0, 0 0; }
+}
+
+/* Reading panels: solid enough to keep paragraphs off busy 3D backgrounds. */
+.panel {
+  background: color-mix(in oklab, var(--color-coal) 92%, transparent);
+  border: 1px solid var(--color-line);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-tide);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection { background: var(--color-iris); color: white; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
